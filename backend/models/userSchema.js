@@ -3,6 +3,7 @@ import AuthRoles from '../utils/AuthRoles';
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 require('dotenv').config()
+import crypto from "crypto";
 
 const userSchema = mongoose.Schema({
     name: {
