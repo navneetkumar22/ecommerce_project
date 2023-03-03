@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 require('dotenv').config()
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Name is required"],
@@ -79,3 +79,5 @@ userSchema.methods = {
     }
 
 }
+
+module.exports = new mongoose.model("User", userSchema);
