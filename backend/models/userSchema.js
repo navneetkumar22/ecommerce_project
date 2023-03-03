@@ -3,7 +3,6 @@ import AuthRoles from '../utils/AuthRoles';
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 require('dotenv').config()
-import crypto from "crypto";
 
 const userSchema = mongoose.Schema({
     name: {
@@ -62,6 +61,21 @@ userSchema.methods = {
                 expiresIn: process.env.JWT_EXPIRY || "30d"
             }
         )
+    },
+
+    //Generate forgot password token
+    generateForgotPasswordToken: function () {
+        const forgotToken = crypto.randomBytes(20).toString('hex');
+
+        //save to database and send the same to user
+        this.forgotPasswordToken = crypto.createHash('sha256')
+            .update(forgotToken)
+            .digest('hex')
+
+        this.forgotPasswordExpiry = Date.now() + 20 * 60 * 1000;
+
+        //return same token to user
+        return forgotToken;
     }
 
 }
