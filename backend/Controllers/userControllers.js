@@ -147,13 +147,6 @@ exports.forgetPassword = asyncHandler(async (req, res) => {
 })
 
 
-/**
- * 
- * todo - change password - do study
- */
-
-
-
 /************************************************************** 
  * @Reset_Password
  * @Request_type
@@ -205,6 +198,28 @@ exports.resetPassword = asyncHandler(async (req, res) => {
 
 })
 
+//change password
+exports.updatePassword = asyncHandler(async (req, res) => {
+
+    const user = await User.findById(req.user._id).select("+password");
+
+    const isOldPasswordCorrect = await user.comparePassword(req.body.password);
+
+    if (!isOldPasswordCorrect) {
+        throw new Error("Old password is incorrect")
+    }
+
+    user.password = req.body.newPassword;
+    await user.save();
+
+    user.password = undefined;
+    res.status(200).json({
+        success: true,
+        message: "Password updated successfully",
+        user
+    })
+})
+
 
 /************************************************************** 
  * @Get_profile
@@ -225,4 +240,35 @@ exports.userProfile = asyncHandler(async (req, res) => {
         user
     })
 
+})
+
+
+//user dashboard
+exports.userDetails = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
+
+
+//update user details
+exports.updateUserDetails = asyncHandler(async (req,res) => {
+    const newDetails = {
+        name: req.body.name,
+        email: req.body.email
+    };
+
+    const user = await User.findByIdAndUpdate(req.user._id, newDetails, {
+        new: true,
+        runValidators : true,
+        useFindAndModify: false
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "User details updated successfully"
+    })
 })
