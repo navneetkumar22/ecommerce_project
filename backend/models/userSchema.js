@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
-import AuthRoles from '../utils/AuthRoles';
-import bcrypt from "bcryptjs";
-import JWT from "jsonwebtoken";
-require('dotenv').config()
+const mongoose = require("mongoose");
+const AuthRoles = require('../utils/AuthRoles');
+const bcrypt = require("bcryptjs");
+const JWT = require("jsonwebtoken");
+const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema({
     name: {

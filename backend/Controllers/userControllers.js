@@ -1,7 +1,14 @@
-import User from "../models/userSchema";
-import asyncHandler from "../services/asyncHandler";
-import cookieOptions from "../utils/cockieOptions";
-import crypto from "crypto";
+const User = require("../models/userSchema");
+const asyncHandler = require("../services/asyncHandler");
+const cookieOptions = require("../utils/cookieOptions");
+const crypto = require("crypto");
+const mailHelper = require("../utils/emailHelper");
+
+
+//home route
+exports.home = (_req, res) => {
+    res.send("<h1>Hello world, this is an ecommerce app</h1>")
+}
 
 
 /************************************************************** 
@@ -13,7 +20,7 @@ import crypto from "crypto";
  * @returns User Object
  ***************************************************************/
 
-export const signUp = asyncHandler(async (req, res) => {
+exports.signUp = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -53,7 +60,7 @@ export const signUp = asyncHandler(async (req, res) => {
  * @returns User Object
  ***************************************************************/
 
-export const login = asyncHandler(async (req, res) => {
+exports.login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -87,14 +94,14 @@ export const login = asyncHandler(async (req, res) => {
 
 /************************************************************** 
  * @SIGN_OUT
- * @Request_type
+ * @Request_type GET/POST
  * @Route http://localhost:4000/api/auth/signout
  * @description User signOut by clearing user cookies
  * @parameters
  * @returns success message 
  ***************************************************************/
 
-export const logout = asyncHandler(async (_req, res) => {
+exports.logout = asyncHandler(async (_req, res) => {
     res.cookie("token", null, {
         expires: new Date(Date.now()),
         httpOnly: true
@@ -105,8 +112,42 @@ export const logout = asyncHandler(async (_req, res) => {
     })
 })
 
+
+//forget Password controller
+exports.forgetPassword = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    const forgetToken = user.generateForgotPasswordToken();
+    await user.save({ validateBeforeSave: false });
+
+    const myUrl = `${req.protocol}://${req.get("host")}/password/forget/${forgetToken}`;
+    const message = `Copy Paste this link in your URL and hit enter \n\n ${myUrl}`;
+
+    //send email
+    try {
+        await mailHelper({
+            email: user.email,
+            subject: "Ecommerce Store - Password reset email",
+            text: message
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "Email sent successfully"
+        })
+    } catch (error) {
+        user.forgotPasswordToken = undefined;
+        user.forgotPasswordExpiry = undefined;
+        await user.save({ validateBeforeSave: false });
+
+        return new Error(error.message);
+    }
+
+})
+
+
 /**
- * todo - forgot password - do study
  * 
  * todo - change password - do study
  */
@@ -116,14 +157,14 @@ export const logout = asyncHandler(async (_req, res) => {
 /************************************************************** 
  * @Reset_Password
  * @Request_type
- * @Route http://localhost:4000/api/auth/password/reset/:resetToken
+ * @Route http://localhost:4000/password/reset/:resetToken
  * @description User will be allowed to reset password
  * @parameters token from url, password and confirmPassword
  * @returns user object
  ***************************************************************/
 
-export const resetPassword = asyncHandler(async (req, res) => {
-    const { token: resetToken } = req.params;
+exports.resetPassword = asyncHandler(async (req, res) => {
+    const resetToken = req.params.resetToken;
     const { password, confirmPassword } = req.body;
 
     const resetPasswordToken = crypto
@@ -174,7 +215,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
  * @returns user object
  ***************************************************************/
 
-export const userProfile = asyncHandler(async (req, res) => {
+exports.userProfile = asyncHandler(async (req, res) => {
     const user = req;
     if (!user) {
         throw new Error("User not found")
