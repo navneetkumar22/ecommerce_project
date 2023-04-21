@@ -16,3 +16,12 @@ exports.isLoggedIn = asyncHandler(async (req, _res, next) => {
 
     next();
 });
+
+exports.customRole = (...roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return next(Error("You are not allowed to access this route"))
+        }
+        next()
+    }
+}
