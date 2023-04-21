@@ -1,7 +1,7 @@
 const AuthRoles = {
-    ADMIN: "ADMIN",
+    ADMIN: "admin",
     MODERATOR: "MODERATOR",
-    USER: "USER"
+    USER: "user"
 }
 
 module.exports = AuthRoles;

@@ -255,7 +255,7 @@ exports.userDetails = asyncHandler(async (req, res) => {
 
 
 //update user details
-exports.updateUserDetails = asyncHandler(async (req,res) => {
+exports.updateUserDetails = asyncHandler(async (req, res) => {
     const newDetails = {
         name: req.body.name,
         email: req.body.email
@@ -263,7 +263,7 @@ exports.updateUserDetails = asyncHandler(async (req,res) => {
 
     const user = await User.findByIdAndUpdate(req.user._id, newDetails, {
         new: true,
-        runValidators : true,
+        runValidators: true,
         useFindAndModify: false
     });
 
@@ -272,3 +272,76 @@ exports.updateUserDetails = asyncHandler(async (req,res) => {
         message: "User details updated successfully"
     })
 })
+
+
+
+
+/**
+ * Admin controllers
+ * 
+ * get all user
+ * get a single user
+ * 
+ * delete a user 
+ */
+
+//fetch all users
+exports.adminAllUsers = asyncHandler(async (req, res, next) => {
+    const users = await User.find({ role: "USER" });
+
+    res.status(200).json({
+        success: true,
+        users
+    })
+})
+
+//get a single user
+exports.adminGetOneUser = asyncHandler(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+        throw new Error("User not found in database");
+    }
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
+
+//update a user
+exports.adminUpdateOneUser = asyncHandler(async (req, res, next) => {
+    const newData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role
+    }
+
+    const user = await User.findByIdAndUpdate(req.params.id, newData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true,
+        message: "User details updated successfully"
+    })
+})
+
+//delete a user
+exports.adminDeleteUSer = asyncHandler(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+        throw new Error("No such user found")
+    }
+
+    user.remove();
+
+    res.status(200).json({
+        success: true,
+        message: "User deleted successfully"
+    })
+})
+
