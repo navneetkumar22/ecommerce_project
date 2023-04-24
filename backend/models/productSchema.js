@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema(
     {
@@ -6,7 +6,7 @@ const productSchema = mongoose.Schema(
             type: String,
             required: [true, "Name of the product is required"],
             trim: true,
-            maxlength: [120, "Name of product should not exceed 120 characters"]
+            maxlength: [120, "Product name should not exceed 120 characters"]
         },
         price: {
             type: Number,
@@ -15,9 +15,13 @@ const productSchema = mongoose.Schema(
         },
         description: {
             type: String,
-            // have to use some editors
+            required: [true, "Please provide a description of product"]
         },
         photos: [{
+            id: {
+                type: String,
+                required: true
+            },
             image_url: {
                 type: String,
                 required: [true, "Url of the image is required"]
@@ -34,8 +38,45 @@ const productSchema = mongoose.Schema(
         collectionId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Collection"
+        },
+        ratings: {
+            type: Number,
+            default: 0
+        },
+        numberOfReviews: {
+            type: Number,
+            default: 0
+        },
+        reviews: [
+            {
+                user: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User",
+                    required: true
+                },
+                name: {
+                    type: String,
+                    required: true
+                },
+                rating: {
+                    type: Number,
+                    required: true
+                },
+                comment: {
+                    type: String,
+                    required: true
+                }
+            }
+        ],
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
         }
-
-        //can add ratings and reviews also
+    },
+    {
+        timestamps: true
     }
 )
+
+module.exports = mongoose.model("Product", productSchema)
