@@ -8,6 +8,7 @@ const morgan = require("morgan");
 //import all routes
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 //middlewares
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use(cookieParser());
 // router middlewares
 app.use("/", userRoutes)
 app.use("/", productRoutes)
+app.use("/", paymentRoutes)
 
 //morgan logger
 app.use(morgan("tiny"));
