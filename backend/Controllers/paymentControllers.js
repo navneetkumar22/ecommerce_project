@@ -44,11 +44,11 @@ exports.captureRazorpayPayment = asyncHandler(async (req, res) => {
         currency: "INR"
     }
 
-    const myOrer = instance.orders.create(options);
+    const myOrder = instance.orders.create(options);
 
     res.status(200).json({
         success: true,
         amount: req.body.amount,
-        order: myOrer
+        order: myOrder
     })
 })

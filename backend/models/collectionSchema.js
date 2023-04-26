@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-const collectionSchema = mongoose.Schema(
+const collectionSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -14,4 +14,4 @@ const collectionSchema = mongoose.Schema(
     }
 )
 
-export default mongoose.model("Collection", collectionSchema);
+module.exports = new mongoose.model("Collection", collectionSchema);
