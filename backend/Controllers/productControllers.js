@@ -9,7 +9,7 @@ const WhereClause = require("../utils/whereClause");
  * */
 
 //add a product
-exports.adminAddProduct = asyncHandler(async (req, res, next) => {
+exports.adminAddProduct = asyncHandler(async (req, res) => {
     //handling images
     let imageArray = [];
 
@@ -44,7 +44,7 @@ exports.adminAddProduct = asyncHandler(async (req, res, next) => {
 })
 
 //update a product
-exports.adminUpdateProduct = asyncHandler(async (req, res, next) => {
+exports.adminUpdateProduct = asyncHandler(async (req, res) => {
     let product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -87,7 +87,7 @@ exports.adminUpdateProduct = asyncHandler(async (req, res, next) => {
 })
 
 //delete a product
-exports.adminDeleteProduct = asyncHandler(async (req, res, next) => {
+exports.adminDeleteProduct = asyncHandler(async (req, res) => {
 
     const product = await Product.findById(req.params.id);
 
@@ -108,7 +108,7 @@ exports.adminDeleteProduct = asyncHandler(async (req, res, next) => {
 //user controllers
 
 //fetch all products - with search query
-exports.getAllProducts = asyncHandler(async (req, res, next) => {
+exports.getAllProducts = asyncHandler(async (req, res) => {
     const resultPerPage = 6;
     const totalProductsCount = await Product.countDocuments();
 
@@ -127,7 +127,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
 })
 
 //all products
-exports.allProducts = asyncHandler(async (req, res, next) => {
+exports.allProducts = asyncHandler(async (_req, res) => {
     const products = await Product.find();
 
     res.status(200).json({
@@ -137,7 +137,7 @@ exports.allProducts = asyncHandler(async (req, res, next) => {
 })
 
 //fetch one product
-exports.getSingleProduct = asyncHandler(async (req, res, next) => {
+exports.getSingleProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -151,7 +151,7 @@ exports.getSingleProduct = asyncHandler(async (req, res, next) => {
 })
 
 //add a review
-exports.addReview = asyncHandler(async (req, res, next) => {
+exports.addReview = asyncHandler(async (req, res) => {
     const { rating, comment, productId } = req.body;
 
     const review = {
@@ -188,7 +188,7 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 })
 
 //delete a review
-exports.deleteReview = asyncHandler(async (req, res, next) => {
+exports.deleteReview = asyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
 
@@ -211,7 +211,7 @@ exports.deleteReview = asyncHandler(async (req, res, next) => {
 })
 
 //fetch all reviews for a product
-exports.getAllReviews = asyncHandler(async (req, res, next) => {
+exports.getAllReviews = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
 
     res.status(200).json({

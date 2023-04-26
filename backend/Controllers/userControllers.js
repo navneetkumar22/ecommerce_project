@@ -286,7 +286,7 @@ exports.updateUserDetails = asyncHandler(async (req, res) => {
  */
 
 //fetch all users
-exports.adminAllUsers = asyncHandler(async (req, res, next) => {
+exports.adminAllUsers = asyncHandler(async (_req, res) => {
     const users = await User.find({ role: "USER" });
 
     res.status(200).json({
@@ -296,7 +296,7 @@ exports.adminAllUsers = asyncHandler(async (req, res, next) => {
 })
 
 //get a single user
-exports.adminGetOneUser = asyncHandler(async (req, res, next) => {
+exports.adminGetOneUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (!user) {
@@ -310,7 +310,7 @@ exports.adminGetOneUser = asyncHandler(async (req, res, next) => {
 })
 
 //update a user
-exports.adminUpdateOneUser = asyncHandler(async (req, res, next) => {
+exports.adminUpdateOneUser = asyncHandler(async (req, res) => {
     const newData = {
         name: req.body.name,
         email: req.body.email,
@@ -330,7 +330,7 @@ exports.adminUpdateOneUser = asyncHandler(async (req, res, next) => {
 })
 
 //delete a user
-exports.adminDeleteUSer = asyncHandler(async (req, res, next) => {
+exports.adminDeleteUSer = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (!user) {
