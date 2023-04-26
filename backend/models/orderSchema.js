@@ -1,19 +1,21 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
     {
-        products: {
-            type: [{
-                productId: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "Product",
-                    required: true
-                },
-                count: Number,
-                price: Number
-            }],
-            required: true
-        },
+        products: [{
+            name: {
+                type: String,
+                required: true
+            },
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Product",
+                required: true
+            },
+            quantity: Number,
+            price: Number
+        }],
+
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
@@ -37,9 +39,12 @@ const orderSchema = new mongoose.Schema(
             type: String,
             enum: ["ORDERED", "SHIPPED", "PENDING", "DELIVERED"],
             default: "ORDERED"
-            //improve this like authroles
         }
-
-
+    },
+    {
+        timestamps: true
     }
 )
+
+module.exports = new mongoose.model("Order", orderSchema);
+
