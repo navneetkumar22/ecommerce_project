@@ -11,6 +11,8 @@ const productRoutes = require("./routes/productRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const collectionRoutes = require("./routes/collectionRoutes");
 const couponRoutes = require("./routes/couponRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const wishlistRoutes = require("./routes/wishlistRoutes");
 
 //middlewares
 app.use(express.json());
@@ -24,6 +26,8 @@ app.use("/", productRoutes)
 app.use("/", paymentRoutes)
 app.use("/", collectionRoutes)
 app.use("/", couponRoutes);
+app.use("/", orderRoutes);
+app.use("/", wishlistRoutes);
 
 //morgan logger
 app.use(morgan("tiny"));
