@@ -136,6 +136,20 @@ exports.allProducts = asyncHandler(async (_req, res) => {
     })
 })
 
+//all products of a perticular collection
+exports.allCollectionProducts = asyncHandler(async (req, res) => {
+
+    const products = await Product.find({ collectionId: req.params.id });
+    if (!products) {
+        throw new Error("There are no products in this collection")
+    }
+
+    res.status(200).json({
+        success: true,
+        products
+    })
+})
+
 //fetch one product
 exports.getSingleProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
