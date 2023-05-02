@@ -287,7 +287,7 @@ exports.updateUserDetails = asyncHandler(async (req, res) => {
 
 //fetch all users
 exports.adminAllUsers = asyncHandler(async (_req, res) => {
-    const users = await User.find({ role: "USER" });
+    const users = await User.find({ role: "user" });
 
     res.status(200).json({
         success: true,
@@ -337,7 +337,7 @@ exports.adminDeleteUSer = asyncHandler(async (req, res) => {
         throw new Error("No such user found")
     }
 
-    user.remove();
+    await user.deleteOne();
 
     res.status(200).json({
         success: true,

@@ -5,7 +5,7 @@ const { getCart, addToCart, deleteProductFromCart } = require("../Controllers/ca
 
 router.get("/cart", isLoggedIn, getCart);
 router.post("/cart/add/:id", isLoggedIn, addToCart);
-router.delete("/cart/delete/:id".isLoggedIn, deleteProductFromCart);
+router.delete("/cart/delete/:id", isLoggedIn, deleteProductFromCart);
 
 
 module.exports = router;

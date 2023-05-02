@@ -20,6 +20,6 @@ router.post("/dashboard/update", isLoggedIn, updateUserDetails);
 router.get("/admin/users", isLoggedIn, customRole("admin"), adminAllUsers);
 router.get("/admin/user/:id", isLoggedIn, customRole("admin"), adminGetOneUser);
 router.put("/admin/user/:id", isLoggedIn, customRole("admin"), adminUpdateOneUser);
-router.delete("/admin/user/:id", isLoggedIn, customRole("admn"), adminDeleteUSer);
+router.delete("/admin/user/:id", isLoggedIn, customRole("admin"), adminDeleteUSer);
 
 module.exports = router;
