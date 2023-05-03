@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+const fileUplaod = require("express-fileupload");
 
 //import all routes
 const userRoutes = require("./routes/userRoutes");
@@ -20,6 +21,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.use(cookieParser());
+app.use(fileUplaod({
+    useTempFiles: true,
+    tempFileDir: "/tmp/"
+}));
 
 // router middlewares
 app.use("/", userRoutes)

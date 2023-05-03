@@ -88,6 +88,7 @@ exports.adminUpdateProduct = asyncHandler(async (req, res) => {
 
 //delete a product
 exports.adminDeleteProduct = asyncHandler(async (req, res) => {
+    c
 
     const product = await Product.findById(req.params.id);
 
@@ -96,7 +97,7 @@ exports.adminDeleteProduct = asyncHandler(async (req, res) => {
         await cloudinary.v2.uploader.destroy(product.photos[i].id)
     }
 
-    await product.remove();
+    await product.deleteOne();
 
     res.status(200).json({
         success: true,
@@ -171,7 +172,7 @@ exports.addReview = asyncHandler(async (req, res) => {
     const review = {
         user: req.user._id,
         name: req.user.name,
-        rating: Number(rating),
+        rating: rating,
         comment
     }
 
@@ -187,14 +188,29 @@ exports.addReview = asyncHandler(async (req, res) => {
         })
     } else {
         product.reviews.push(review);
-        product.numberOfReviews = product.reviews.length
     }
 
+
     //adjust ratings of product
-    product.ratings = product.reviews.reduce((acc, item) => (item.rating + acc, 0)) / product.reviews.length
+    const allReviews = product.reviews;
+    const reviewsCount = allReviews.length;
+
+    const totalRatings = allReviews.reduce((accumulator, review) => accumulator + review.rating, 0);
+    const averageRating = totalRatings / allReviews.length;
 
     //save
-    await product.save({ validateBeforeSave: false });
+    await Product.findByIdAndUpdate(productId,
+        {
+            reviews: allReviews,
+            ratings: averageRating,
+            numberOfReviews: reviewsCount
+        },
+        {
+            new: true,
+            runValidators: false,
+            useFindAndModify: false
+        });
+
     res.status(200).json({
         success: true,
         message: "Review is added successfully"
@@ -206,17 +222,31 @@ exports.deleteReview = asyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
 
-    const reviews = product.reviews.filter((rev) => rev.user.toString() === req.user._id.toString())
-    const numberOfReviews = reviews.length;
+    const allReviews = product.reviews.filter((rev) => rev.user.toString() !== req.user._id.toString())
 
-    product.ratings = product.reviews.reduce((acc, item) => (item.rating + acc, 0)) / product.reviews.length
+    const reviewsCount = allReviews.length;
+    const totalRatings = allReviews.reduce((accumulator, review) => accumulator + review.rating, 0);
+
+    //check if there is no review
+    let averageRating;
+    if (reviewsCount === 0) {
+        averageRating = 0;
+    } else {
+        averageRating = totalRatings / reviewsCount;
+    }
 
     //update the product
-    await Product.findByIdAndUpdate(productId, { reviews, ratings, numberOfReviews }, {
-        new: true,
-        runValidators: false,
-        useFindAndModify: false
-    })
+    await Product.findByIdAndUpdate(productId,
+        {
+            reviews: allReviews,
+            ratings: averageRating,
+            numberOfReviews: reviewsCount
+        },
+        {
+            new: true,
+            runValidators: false,
+            useFindAndModify: false
+        })
 
     res.status(200).json({
         success: true,

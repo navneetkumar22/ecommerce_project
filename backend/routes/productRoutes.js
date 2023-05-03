@@ -7,11 +7,11 @@ const { getAllProducts, allProducts, getSingleProduct, addReview, deleteReview,
 
 
 //user routes
-router.get("/products/all", isLoggedIn, allProducts);
-router.get("/products", isLoggedIn, getAllProducts);
-router.get("/products/collection/:id", allCollectionProducts)
-router.get("/product/:id", isLoggedIn, getSingleProduct);
-router.put("/review", isLoggedIn, addReview);
+router.get("/products/all", allProducts);
+router.get("/products", getAllProducts);
+router.get("/products/collection/:id", allCollectionProducts);
+router.get("/product/:id", getSingleProduct);
+router.put("/review/add", isLoggedIn, addReview);
 router.delete("/review/:id", isLoggedIn, deleteReview);
 router.get("/reviews/:id", getAllReviews)
 
