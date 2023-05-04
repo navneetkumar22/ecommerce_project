@@ -59,7 +59,7 @@ exports.deleteCollection = asyncHandler(async (req, res) => {
         throw new Error("No such collection is found")
     }
 
-    await collection.remove();
+    await collection.deleteOne();
 
     res.status(200).json({
         success: true,
