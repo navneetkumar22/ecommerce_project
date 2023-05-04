@@ -30,7 +30,7 @@ exports.addToCart = asyncHandler(async (req, res) => {
 
     //if cart not existed- create one
     if (!cart) {
-        await Cart.create({ user: userId, products: [] });
+        await Cart.create({ user: userId, products: [{ productId }] });
     }
 
     //if product is already existed in cart then update quantity
@@ -62,7 +62,7 @@ exports.deleteProductFromCart = asyncHandler(async (req, res) => {
     }
 
     //if product is already existed in cart then remove it
-    const existingProductIndex = cart.products.indexOf(productId);
+    const existingProductIndex = cart.products.findIndex((item) => item.id === productId);
     if (existingProductIndex === -1) {
         throw new Error("Product not existed in cart")
     }
