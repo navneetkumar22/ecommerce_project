@@ -25,9 +25,9 @@ exports.addToWishList = asyncHandler(async (req, res) => {
     let wishList = await Wishlist.findOne({ user: user });
 
     if (!wishList) {
-        wishList = await Wishlist.create({ user: user, products: [product] })
+        wishList = await Wishlist.create({ user: user, products: [{ product }] })
     } else {
-        wishList.products.push(product);
+        wishList.products.push({ product });
         await wishList.save();
     }
 
@@ -42,20 +42,20 @@ exports.addToWishList = asyncHandler(async (req, res) => {
 //delete a product from wishlist
 exports.deleteFromWishList = asyncHandler(async (req, res) => {
 
-    const product = req.params.id;
+    const productId = req.params.id;
     const wishList = await Wishlist.findOne({ user: req.user._id })
 
     if (!wishList) {
         throw new Error("Wishlist not found")
     }
 
-    //find index of the product
-    const productIndex = wishList.products.indexOf(product);
+    // find index of the product
+    const productIndex = wishList.products.findIndex((element) => element.id === productId);
     if (productIndex === -1) {
         throw new Error("Product not found in the wishlist")
     }
 
-    //remove this index
+    // remove this index and save
     wishList.products.splice(productIndex, 1);
     await wishList.save();
 
