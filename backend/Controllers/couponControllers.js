@@ -4,13 +4,13 @@ const asyncHandler = require("../services/asyncHandler");
 
 //create a coupon
 exports.createCoupon = asyncHandler(async (req, res) => {
-    const { code, discount } = req.body;
+    const { code, discount, active } = req.body;
 
     if (!(code || discount)) {
         throw new Error("Coupon code and discount field is required")
     }
 
-    const coupon = await Coupon.create({ code, discount });
+    const coupon = await Coupon.create({ code, discount, active });
 
     res.status(200).json({
         success: true,
@@ -35,8 +35,8 @@ exports.getAllCoupons = asyncHandler(async (_req, res) => {
 //update coupon
 exports.updateCoupon = asyncHandler(async (req, res) => {
 
-    const { code, discount } = req.body;
-    const coupon = await Coupon.findByIdAndUpdate(req.params.id, { code, discount }, {
+    const { code, discount, active } = req.body;
+    const coupon = await Coupon.findByIdAndUpdate(req.params.id, { code, discount, active }, {
         new: true,
         runValidators: true
     });
@@ -55,7 +55,7 @@ exports.deleteCoupon = asyncHandler(async (req, res) => {
         throw new Error("No such coupon is available")
     }
 
-    await coupon.remove();
+    await coupon.deleteOne();
 
     res.status(200).json({
         success: true,
