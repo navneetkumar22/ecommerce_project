@@ -6,7 +6,10 @@ const cloudinary = require("cloudinary");
 //iife function - to connect to database immediately
 (async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI)
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
         console.log("DataBase CONNECTED");
 
         app.on('error', (err) => {
