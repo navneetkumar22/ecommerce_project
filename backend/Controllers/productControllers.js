@@ -88,8 +88,7 @@ exports.adminUpdateProduct = asyncHandler(async (req, res) => {
 
 //delete a product
 exports.adminDeleteProduct = asyncHandler(async (req, res) => {
-    c
-
+    
     const product = await Product.findById(req.params.id);
 
     //removing images of product

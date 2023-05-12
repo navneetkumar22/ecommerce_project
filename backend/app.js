@@ -19,7 +19,10 @@ const cartRoutes = require("./routes/cartRoutes");
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: true
+}));
 app.use(cookieParser());
 app.use(fileUplaod({
     useTempFiles: true,
