@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "77509cb6-8daf-446d-81de-57ad7dbdea7d",
+		"name": "Coupons",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ADMIN - Create a Coupon",
+			"_postman_id": "197d0ebd-1337-466a-a359-44a60c20ac1c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"ECOM40\",\n    \"discount\": \"40\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/coupon/create"
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Get all Coupons",
+			"_postman_id": "a0222931-fdbf-4395-b822-08a22fdd8aa0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:4000/coupons"
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Update a Coupon",
+			"_postman_id": "f99f8347-2bcc-4b6d-8c34-a342a4ee19d1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"ECOM40\",\n    \"discount\": \"40\",\n    \"active\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/coupon/64532058e3ec19cb04ad9e68"
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Delete Coupon",
+			"_postman_id": "38d3ce33-fddc-4d53-8b21-2fa4d2620241",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:4000/coupon/64532058e3ec19cb04ad9e68"
+			},
+			"response": []
+		}
+	]
+}
