@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "61f2195c-ebf9-4941-aff7-44238be4a503",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"_postman_id": "1e944ccf-764b-45ac-9af4-b2abd435e279",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Rajat Panwar\",\n    \"email\": \"rajat@gmail.com\",\n    \"password\": \"abc@123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"_postman_id": "883f641b-a716-45eb-8b3e-543fc6a52438",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"abhijeet@gmail.com\",\n    \"password\":\"abc@123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/login"
+			},
+			"response": []
+		},
+		{
+			"name": "LogOut",
+			"_postman_id": "dc9d4955-be00-4363-87a3-982208e0931f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:4000/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"_postman_id": "68006728-5b0d-4846-bc8c-bac2ec2c85d4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "localhost:4000/password/forget"
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"_postman_id": "9381d6a8-d229-4714-992d-349f13536c79",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"abc@12345678\",\n    \"confirmPassword\":\"abc@12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:4000/password/forget/a66eaec2ae94812444a334db89f3a8a27358d005"
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"_postman_id": "e2706d87-505e-48ba-a457-c538f083e1a4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"abc@12345678\",\n    \"newPassword\":\"abc@123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/password/update"
+			},
+			"response": []
+		},
+		{
+			"name": "User Dashboard",
+			"_postman_id": "87aa60b5-63fa-462d-b38e-5f6d05f9854e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:4000/dashboard"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Dashboard",
+			"_postman_id": "3ad86a54-f992-4089-b35b-cc53c5c4dc06",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Manjeet Panwar\",\n    \"email\":\"manjeet@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/dashboard/update"
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - All Users",
+			"_postman_id": "182d4156-43de-4d4b-9846-9592b9a1d888",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:4000/admin/users"
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Get a User",
+			"_postman_id": "56c22321-d73a-4e75-85b2-dc705c59737f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:4000/admin/user/6450f07fa06a3f4038c5cc5e"
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Update a User",
+			"_postman_id": "655951bf-182a-4b66-b7fd-9affb82adfbc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Manjeet Panwar\",\n    \"email\":\"manjeet@yahoo.com\",\n    \"role\":\"user\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:4000/admin/user/6450f07fa06a3f4038c5cc5e"
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Delete a User",
+			"_postman_id": "57130781-80d2-4277-a1ba-b4356e40fef1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:4000/admin/user/6450f07fa06a3f4038c5cc5e"
+			},
+			"response": []
+		}
+	]
+}
