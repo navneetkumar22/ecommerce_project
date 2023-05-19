@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "8ca88199-d18f-453d-b4a6-6313da1f9e63",
+		"name": "Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25474097"
+	},
+	"item": [
+		{
+			"name": "ADMIN - Create a collection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Chinese Food\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/collection/create",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"collection",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Collections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/collections",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Update collection",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Japanese Food\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/collection/645332a417b2ccb56903fe68",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"collection",
+						"645332a417b2ccb56903fe68"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Delete collection",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/collection/645332a417b2ccb56903fe68",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"collection",
+						"645332a417b2ccb56903fe68"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
