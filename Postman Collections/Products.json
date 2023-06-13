@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "6ab5004f-8531-4bb7-b03b-f4a6152bc0bc",
+		"name": "Products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25474097"
+	},
+	"item": [
+		{
+			"name": "ADMIN - Add a product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Fresh Juice",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "49",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Fresh tropicana juice",
+							"type": "text"
+						},
+						{
+							"key": "photos",
+							"type": "file",
+							"src": [
+								"/Users/navneet/Desktop/sampleImages/product-11.jpg",
+								"/Users/navneet/Desktop/sampleImages/product-9.jpg"
+							]
+						},
+						{
+							"key": "collectionId",
+							"value": "645b43a73fe181fc88727dfa",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/admin/product/add",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"admin",
+						"product",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Update a Product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Organic Fruits",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "299",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "This is fresh natural fruits",
+							"type": "text"
+						},
+						{
+							"key": "photos",
+							"type": "file",
+							"src": [
+								"/Users/navneet/Desktop/sampleImages/product-8.jpg",
+								"/Users/navneet/Desktop/sampleImages/product-12.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/admin/product/64519b6a816f9f2e1a5c8252",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"admin",
+						"product",
+						"64519b6a816f9f2e1a5c8252"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN - Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/admin/product/64519b6a816f9f2e1a5c8252",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"admin",
+						"product",
+						"64519b6a816f9f2e1a5c8252"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/products/all",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"products",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Single Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/product/6451a094366f91426af3a8f2",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"product",
+						"6451a094366f91426af3a8f2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - Add a Review",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\":\"6451a110366f91426af3a8fc\",\n    \"rating\":\"2\",\n    \"comment\":\"I don't love apples\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/review/add",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"review",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Review",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/review/6451a110366f91426af3a8fc",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"review",
+						"6451a110366f91426af3a8fc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/reviews/6451a094366f91426af3a8f2",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"reviews",
+						"6451a094366f91426af3a8f2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
