@@ -37,8 +37,7 @@ It enables the user to browse through products, add and remove products from Car
 
 <br>
 
-## **Deployed Link :**
-Currently this project is under development.
-Deployed link will be available soon.
+## **Frontend Link :**
+https://github.com/navneetkumar22/e_commerce_frontend
 
 <br>
