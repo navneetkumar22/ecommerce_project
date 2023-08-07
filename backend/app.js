@@ -5,6 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const fileUplaod = require("express-fileupload");
+const connectToDB= require('./config/database');
 
 //import all routes
 const userRoutes = require("./routes/userRoutes");
@@ -28,6 +29,9 @@ app.use(fileUplaod({
     useTempFiles: true,
     tempFileDir: "/tmp/"
 }));
+
+//connecting to databse
+connectToDB();
 
 // router middlewares
 app.use("/", userRoutes)
