@@ -5,7 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const fileUplaod = require("express-fileupload");
-const connectToDB= require('./config/database');
+const connectToDB = require('./config/database');
 
 //import all routes
 const userRoutes = require("./routes/userRoutes");
