@@ -4,7 +4,8 @@ const asyncHandler = require("../services/asyncHandler");
 
 
 exports.isLoggedIn = asyncHandler(async (req, _res, next) => {
-    const token = req.cookies.token;
+    const { authorization } = req.headers;
+    const token = authorization.split(' ')[1];
 
     if (!token) {
         throw new Error("Not authorized to access this route")

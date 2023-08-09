@@ -1,7 +1,7 @@
 const Product = require("../models/productSchema");
 const asyncHandler = require("../services/asyncHandler");
 const cloudinary = require("cloudinary");
-const WhereClause = require("../utils/whereClause");
+// const WhereClause = require("../utils/whereClause");
 
 
 /**
@@ -108,23 +108,23 @@ exports.adminDeleteProduct = asyncHandler(async (req, res) => {
 //user controllers
 
 //fetch all products - with search query
-exports.getAllProducts = asyncHandler(async (req, res) => {
-    const resultPerPage = 6;
-    const totalProductsCount = await Product.countDocuments();
+// exports.getAllProducts = asyncHandler(async (req, res) => {
+//     const resultPerPage = 6;
+//     const totalProductsCount = await Product.countDocuments();
 
-    let productsObj = new WhereClause(Product.find(), req.query).search().filter();
+//     let productsObj = new WhereClause(Product.find(), req.query).search().filter();
 
-    productsObj.pager(resultPerPage);
-    const products = await productsObj.base.clone();
-    const filteredProductsCount = products.length;
+//     productsObj.pager(resultPerPage);
+//     const products = await productsObj.base.clone();
+//     const filteredProductsCount = products.length;
 
-    res.status(200).json({
-        success: true,
-        products,
-        filteredProductsCount,
-        totalProductsCount
-    })
-})
+//     res.status(200).json({
+//         success: true,
+//         products,
+//         filteredProductsCount,
+//         totalProductsCount
+//     })
+// })
 
 //all products
 exports.allProducts = asyncHandler(async (_req, res) => {
