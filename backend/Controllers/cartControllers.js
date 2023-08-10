@@ -5,7 +5,10 @@ const asyncHandler = require("../services/asyncHandler");
 //get all items in cart
 exports.getCart = asyncHandler(async (req, res) => {
 
-    const cart = await Cart.findOne({ user: req.user._id })
+    const cart = await Cart.findOne({ user: req.user._id }).populate({
+        path: 'products.product',
+        select: 'name price photos'
+    })
 
     if (!cart) {
         throw new Error("Your cart is empty")
